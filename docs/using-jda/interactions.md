@@ -434,7 +434,7 @@ There can be multiple options selected and set as default.
 
 #### Handling String Select Menus
 
-When a user selects their options from a dropdown and submits their choices, you will receive a `SelectMenuInteractionEvent` for the respective interaction with the selected values.
+When a user selects their options from a dropdown and submits their choices, you will receive a `StringSelectInteractionEvent` for the respective interaction with the selected values.
 
 !!! example
     === "Java"
