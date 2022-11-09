@@ -423,7 +423,7 @@ Each non-link button requires such an ID in order to be used.
 
 ### Select Menus (Dropdowns)
 
-Select Menus can be disabled and have up to 25 options.
+Select Menus can be of two types and can have up to 25 options.
 
 It's possible to set the minimum and maximum number of options to be selected.
 
@@ -432,7 +432,7 @@ There can be multiple options selected and set as default.
 
 ![Example Select Menu With A Default Value](https://i.imgur.com/44q006n.png)
 
-#### Handling SelectMenuInteractionEvent
+#### Handling String Select Menus
 
 When a user selects their options from a dropdown and submits their choices, you will receive a `SelectMenuInteractionEvent` for the respective interaction with the selected values.
 
@@ -445,7 +445,7 @@ When a user selects their options from a dropdown and submits their choices, you
                 if (event.getName().equals("food")) {
                     event.reply("Choose your favorite food")
                         .addActionRow(
-                            SelectMenu.create("choose-food")
+                            StringSelectMenu.create("choose-food")
                               .addOption("Pizza", "pizza", "Classic") // SelectOption with only the label, value, and description
                               .addOptions(SelectOption.of("Hamburger", "hamburger") // another way to create a SelectOption
                                     .withDescription("Tasty") // this time with a description
@@ -457,7 +457,7 @@ When a user selects their options from a dropdown and submits their choices, you
             }
     
             @Override
-            public void onSelectMenuInteraction(SelectMenuInteractionEvent event) {
+            public void onStringSelectInteraction(StringSelectInteractionEvent event) {
                 if (event.getComponentId().equals("choose-food")) {
                     event.reply("You chose " + event.getValues().get(0)).queue();
                 }
@@ -469,7 +469,7 @@ When a user selects their options from a dropdown and submits their choices, you
         object DropdownBot : ListenerAdapter() {
             override fun onSlashCommandInteraction(event: SlashCommandInteractionEvent) {
                 if (event.name == "food") {
-                    val selectMenu = SelectMenu.create("choose-food")
+                    val selectMenu = StringSelectMenu.create("choose-food")
                         .addOption("Pizza", "pizza", "Classic") // SelectOption with only the label, value, and description
                         .addOptions(SelectOption.of("Hamburger", "hamburger") // another way to create a SelectOption
                             .withDescription("Tasty") // this time with a description
@@ -483,7 +483,7 @@ When a user selects their options from a dropdown and submits their choices, you
                 }
             }
         
-            override fun onSelectMenuInteraction(event: SelectMenuInteractionEvent) {
+            override fun onStringSelectInteraction(event: StringSelectInteractionEvent) {
                 if (event.componentId == "choose-food") {
                     event.reply("You chose " + event.values[0]).queue()
                 }
